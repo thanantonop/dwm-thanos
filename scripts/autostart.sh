@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/home/antonopo/github/dwm-thanos/scripts/status &
+/home/thanos/github/dwm-thanos/scripts/status &
 /usr/bin/lxpolkit &
 #/usr/bin/synergy &
 feh --bg-fill --randomize --recursive $HOME/Pictures/backgrounds/nordic-backgrounds &
