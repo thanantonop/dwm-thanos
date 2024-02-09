@@ -20,17 +20,10 @@ static const char col_gray2[]       = "#3B4252";
 static const char col_gray3[]       = "#D8DEE9";
 static const char col_gray4[]       = "#ECEFF4";
 static const char col_cyan[]        = "#434C5E";
-static const unsigned int baralpha = 0xc0;
-static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-};
-static const unsigned int alphas[][3]      = {
-    /*               fg      bg        border*/
-    [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 static const char *const autostart[] = {
@@ -43,7 +36,7 @@ static const char *const autostart[] = {
   "lxpolkit", NULL,
   "dunst", NULL,
   "picom", NULL,
-  "sh", "-c", "$HOME/github/dwm/scripts/status", NULL,
+  "sh", "-c", "$HOME/github/dwm-thanos/scripts/status", NULL,
   "feh", "--bg-max", "$HOME/Pictures/backgrounds/bg.jpg", NULL,
   NULL /* terminate */
 };
