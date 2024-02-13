@@ -32,7 +32,7 @@ static const char *const autostart[] = {
   "xset", "s", "noblank", NULL,
   "xset", "-dkms", NULL,
   "dbus-update-activation-environment", "--systemd", "--all", NULL,
-  "flameshot", NULL,
+/*  "flameshot", NULL, */
   "lxpolkit", NULL,
   "dunst", NULL,
   "picom", NULL,
