@@ -19,7 +19,7 @@ static const char col_gray1[]       = "#2E3440";
 static const char col_gray2[]       = "#3B4252";
 static const char col_gray3[]       = "#D8DEE9";
 static const char col_gray4[]       = "#ECEFF4";
-static const char col_cyan[]        = "#434C5E";
+static const char col_cyan[]        = "#796878";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -36,14 +36,14 @@ static const char *const autostart[] = {
 /*  "flameshot", NULL, */
   "dunst", NULL,
   "picom", NULL,
+  "sh", "-c", "$HOME/github/dwm-thanos/scripts/status", NULL,
   "sh", "-c", "feh --randomize --bg-fill /home/thanos/Pictures/backgrounds/nordic-backgrounds/*", NULL,
-/*  "synergy", NULL, */
   NULL /* terminate */
 };
 
 /* tagging */
-/* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
-static const char *tags[] = { "", "", "", "", "" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+/* static const char *tags[] = { "", "", "", "", "" }; */
 
 static const char ptagf[] = "[%s %s]";	/* format of a tag label */
 static const char etagf[] = "[%s]";	/* format of an empty tag */
@@ -61,17 +61,24 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.75; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "",      tile },    /* first entry is default */
-	{ "",      NULL },    /* no layout function means floating behavior */
-	{ "",      monocle },
+	{ "[]=",      tile },    /* first entry is default */
+	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "[M]",      monocle },
 };
+
+/* static const Layout layouts[] = { */
+ 	/* symbol     arrange function */
+/* 	{ "",      tile }, */    /* first entry is default */
+/* 	{ "",      NULL }, */    /* no layout function means floating behavior */
+/* 	{ "",      monocle }, */
+/* }; */
 
 /* key definitions */
 #define MODKEY Mod4Mask
@@ -83,9 +90,6 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-#define STATUSBAR "dwmblocks"
-
-#define STATUSBAR "dwmblocks"
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -105,7 +109,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD ("flameshot gui -p $HOME/Pictures/screenshots/")},
 	{ MODKEY|ControlMask,           XK_p,      spawn,          SHCMD ("flameshot gui --clipboard")},
 	{ MODKEY,                       XK_e,      spawn,          SHCMD ("thunar")},
-	{ MODKEY,                       XK_w,      spawn,          SHCMD ("looking-glass-client -F")},
 	{ 0,                            0x1008ff02, spawn,         SHCMD ("xbacklight -inc 10")},
 	{ 0,                            0x1008ff03, spawn,         SHCMD ("xbacklight -dec 10")},
 	{ 0,                            0x1008ff11, spawn,         SHCMD ("amixer sset Master 5%- unmute")},
@@ -146,6 +149,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_p,      spawn,          SHCMD("systemctl poweroff")},
 };
 
+
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
@@ -153,9 +157,17 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
-	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
-	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	/* placemouse options, choose which feels more natural:
+	 *    0 - tiled position is relative to mouse cursor
+	 *    1 - tiled postiion is relative to window center
+	 *    2 - mouse pointer warps to window center
+	 *
+	 * The moveorplace uses movemouse or placemouse depending on the floating state
+	 * of the selected client. Set up individual keybindings for the two if you want
+	 * to control these separately (i.e. to retain the feature to move a tiled window
+	 * into a floating position).
+	 */
 	{ ClkClientWin,         MODKEY,         Button1,        moveorplace,    {.i = 2} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
