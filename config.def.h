@@ -36,7 +36,7 @@ static const char *const autostart[] = {
 /*  "flameshot", NULL, */
   "dunst", NULL,
   "picom", NULL,
-  "sh", "-c", "feh --randomize --bg-max /home/thanos/Pictures/backgrounds/nordic-backgrounds/*", NULL,
+  "sh", "-c", "feh --randomize --bg-fill /home/thanos/Pictures/backgrounds/nordic-backgrounds/*", NULL,
 /*  "synergy", NULL, */
   NULL /* terminate */
 };
