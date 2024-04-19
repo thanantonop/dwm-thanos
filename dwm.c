@@ -123,7 +123,7 @@ struct Client {
 	int beingmoved;
 	Client *next;
 	Client *snext;
-	Client *swallowing;	
+	Client *swallowing;
 	Monitor *mon;
 	Window win;
 };
@@ -884,15 +884,14 @@ destroynotify(XEvent *e)
 
 	if ((c = wintoclient(ev->window)))
 		unmanage(c, 1);
-
-	else if ((c = swallowingclient(ev->window)))
-		unmanage(c->swallowing, 1);
-				
 	else if ((c = wintosystrayicon(ev->window))) {
 		removesystrayicon(c);
 		resizebarwin(selmon);
 		updatesystray();
 	}
+
+	else if ((c = swallowingclient(ev->window)))
+		unmanage(c->swallowing, 1);
 }
 
 void
@@ -1376,7 +1375,7 @@ manage(Window w, XWindowAttributes *wa)
 	arrange(c->mon);
 	XMapWindow(dpy, c->win);
 	if (term)
-		swallow(term, c);
+		swallow(term, c);	
 	if (c && c->mon == selmon)
 		XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w/2, c->h/2);
 	focus(NULL);
@@ -2198,6 +2197,7 @@ void
 setup(void)
 {
 	int i;
+	pid_t pid;
 	XSetWindowAttributes wa;
 	Atom utf8string;
 	struct sigaction sa;
@@ -2209,7 +2209,21 @@ setup(void)
 	sigaction(SIGCHLD, &sa, NULL);
 
 	/* clean up any zombies (inherited from .xinitrc etc) immediately */
-	while (waitpid(-1, NULL, WNOHANG) > 0);
+	while ((pid = waitpid(-1, NULL, WNOHANG)) > 0) {
+		pid_t *p, *lim;
+
+		if (!(p = autostart_pids))
+			continue;
+		lim = &p[autostart_len];
+
+		for (; p < lim; p++) {
+			if (*p == pid) {
+				*p = -1;
+				break;
+			}
+		}
+
+	}
 
 	/* init screen */
 	screen = DefaultScreen(dpy);
@@ -2520,12 +2534,9 @@ unmanage(Client *c, int destroyed)
 		XUngrabServer(dpy);
 	}
 	free(c);
-
-	if (!s) {
-		arrange(m);
-		focus(NULL);
-		updateclientlist();
-	}
+	focus(NULL);
+	updateclientlist();
+	arrange(m);
 	if (m == selmon && m->sel)
 		XWarpPointer(dpy, None, m->sel->win, 0, 0, 0, 0,
 		             m->sel->w/2, m->sel->h/2);
@@ -3195,7 +3206,7 @@ main(int argc, char *argv[])
 	if (!(dpy = XOpenDisplay(NULL)))
 		die("dwm: cannot open display");
 	if (!(xcon = XGetXCBConnection(dpy)))
-		die("dwm: cannot get xcb connection\n");		
+		die("dwm: cannot get xcb connection\n");
 	checkotherwm();
 	autostart_exec();
 	setup();
