@@ -34,7 +34,7 @@ static const char col_aurora5[]     = "#B48EAD";
 static const char *colors[][3]      = {
 	/*               fg          bg            border       */
 	[SchemeNorm] = { col_snows1, col_poloarn1, col_poloarn2 },
-	[SchemeSel]  = { col_snows2, col_aurora1, col_aurora1 },
+	[SchemeSel]  = { col_snows2, col_frost4, col_aurora1 },
 };
 
 static const char *const autostart[] = {
@@ -104,7 +104,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_poloarn1, "-nf", col_snows1, "-sb", col_aurora1, "-sf", col_snows2, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_poloarn1, "-nf", col_snows1, "-sb", col_frost4, "-sf", col_snows2, NULL };
 static const char *roficmd[] = { "rofi", "-modi", "drun", "-show", "drun", "-font", "MesloLGS Nerd Font Mono 10", NULL };
 static const char *termcmd[] = { "st", "-f", "MesloLGS Nerd Font Mono:size=10", NULL };
 static const char *termcmd_kitty[]  = { "kitty", NULL };
