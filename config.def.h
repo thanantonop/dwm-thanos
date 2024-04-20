@@ -15,15 +15,26 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const Bool viewontag         = True;     /* Switch view on tag switch */
 static const char *fonts[]          = { "MesloLGS Nerd Font Mono:size=10" };
 static const char dmenufont[]       = "MesloLGS Nerd Font Mono:size=10";
-static const char col_gray1[]       = "#2E3440";
-static const char col_gray2[]       = "#3B4252";
-static const char col_gray3[]       = "#D8DEE9";
-static const char col_gray4[]       = "#ECEFF4";
-static const char col_cyan[]        = "#434C5E";
+static const char col_poloarn1[]    = "#2E3440";
+static const char col_poloarn2[]    = "#3B4252";
+static const char col_poloarn3[]    = "#434C5E";
+static const char col_poloarn4[]    = "#4C566A";
+static const char col_snows1[]      = "#D8DEE9";
+static const char col_snows2[]      = "#ECEFF4";
+static const char col_snows3[]      = "#E5E9F0";
+static const char col_frost1[]      = "#8FBCBB";
+static const char col_frost2[]      = "#88C0D0";
+static const char col_frost3[]      = "#81A1C1";
+static const char col_frost4[]      = "#5E81AC";
+static const char col_aurora1[]     = "#BF616A";
+static const char col_aurora2[]     = "#D08770";
+static const char col_aurora3[]     = "#EBCB8B";
+static const char col_aurora4[]     = "#A3BE8C";
+static const char col_aurora5[]     = "#B48EAD";
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	/*               fg          bg            border       */
+	[SchemeNorm] = { col_snows1, col_poloarn1, col_poloarn2 },
+	[SchemeSel]  = { col_snows2, col_poloarn3, col_aurora1 },
 };
 
 static const char *const autostart[] = {
@@ -93,7 +104,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_poloarn1, "-nf", col_snows1, "-sb", col_poloarn3, "-sf", col_snows2, NULL };
 static const char *roficmd[] = { "rofi", "-modi", "drun", "-show", "drun", "-font", "MesloLGS Nerd Font Mono 10", NULL };
 static const char *termcmd[] = { "st", "-f", "MesloLGS Nerd Font Mono:size=10", NULL };
 static const char *termcmd_kitty[]  = { "kitty", NULL };
