@@ -1,40 +1,30 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 6;        /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing = 1;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;        /* 0 means no systray */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const Bool viewontag         = True;     /* Switch view on tag switch */
-static const char *fonts[]          = { "MesloLGS Nerd Font Mono:size=10" };
-static const char dmenufont[]       = "MesloLGS Nerd Font Mono:size=10";
-static const char col_poloarn1[]    = "#2E3440";
-static const char col_poloarn2[]    = "#3B4252";
-static const char col_poloarn3[]    = "#434C5E";
-static const char col_poloarn4[]    = "#4C566A";
-static const char col_snows1[]      = "#D8DEE9";
-static const char col_snows2[]      = "#ECEFF4";
-static const char col_snows3[]      = "#E5E9F0";
-static const char col_frost1[]      = "#8FBCBB";
-static const char col_frost2[]      = "#88C0D0";
-static const char col_frost3[]      = "#81A1C1";
-static const char col_frost4[]      = "#5E81AC";
-static const char col_aurora1[]     = "#BF616A";
-static const char col_aurora2[]     = "#D08770";
-static const char col_aurora3[]     = "#EBCB8B";
-static const char col_aurora4[]     = "#A3BE8C";
-static const char col_aurora5[]     = "#B48EAD";
-static const char *colors[][3]      = {
-	/*               fg          bg            border       */
-	[SchemeNorm] = { col_snows1, col_poloarn1, col_poloarn2 },
-	[SchemeSel]  = { col_snows2, col_frost4, col_aurora1 },
+static const unsigned int borderpx       = 2;        /* border pixel of windows */
+static const unsigned int gappx          = 6;        /* gaps between windows */
+static const unsigned int snap           = 32;       /* snap pixel */
+static const int swallowfloating         = 1;        /* 1 means swallow floating windows by default */
+static const unsigned int systraypinning = 0;        /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayonleft  = 0;   	 /* 0: systray in the right corner, >0: systray on left of status text */
+static const unsigned int systrayspacing = 1;        /* systray spacing */
+static const int systraypinningfailfirst = 1;        /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray             = 1;        /* 0 means no systray */
+static const int showbar                 = 1;        /* 0 means no bar */
+static const int topbar                  = 1;        /* 0 means bottom bar */
+static const Bool viewontag              = True;     /* Switch view on tag switch */
+static const char *fonts[]               = { "Carlito:size=12" };
+static const char dmenufont[]            = "Carlito:size=12";
+static const char normbgcolor[]          = "#222222";
+static const char normbordercolor[]      = "#444444";
+static const char normfgcolor[]          = "#bbbbbb";
+static const char selfgcolor[]           = "#eeeeee";
+static const char selbordercolor[]       = "#770000";
+static const char selbgcolor[]           = "#005577";
+static const char *colors[][3]           = {
+       /*               fg           bg           border   */
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
 static const char *const autostart[] = {
@@ -48,7 +38,7 @@ static const char *const autostart[] = {
   "dunst", NULL,
   "picom", NULL,
   "sh", "-c", "$HOME/github/dwm-thanos/scripts/status", NULL,
-  "sh", "-c", "feh --randomize --bg-fill /home/thanos/Pictures/backgrounds/nordic-backgrounds/*", NULL,
+  "sh", "-c", "feh --randomize --bg-fill /home/thanos/Pictures/backgrounds/space-webb/*", NULL,
   NULL /* terminate */
 };
 
@@ -104,8 +94,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_poloarn1, "-nf", col_snows1, "-sb", col_frost4, "-sf", col_snows2, NULL };
-static const char *roficmd[] = { "rofi", "-modi", "drun", "-show", "drun", "-font", "MesloLGS Nerd Font Mono 10", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *roficmd[] = { "rofi", "-modi", "drun", "-show", "drun", "-font", "Carlito 12", NULL };
 static const char *termcmd[] = { "st", "-f", "MesloLGS Nerd Font Mono:size=10", NULL };
 static const char *termcmd_kitty[]  = { "kitty", NULL };
 
