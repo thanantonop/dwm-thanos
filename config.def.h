@@ -32,7 +32,7 @@ static const char *const autostart[] = {
   "xset", "s", "noblank", NULL,
   "xset", "-dpms", NULL,
   "dbus-update-activation-environment", "--systemd", "--all", NULL,
-  "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1", NULL,
+  "/usr/bin/lxpolkit", NULL,
   "dunst", NULL,
   "picom", "--config", "/home/thanos/.config/picom.conf", NULL,
   "/home/thanos/github/dwm-thanos/scripts/status", NULL,
