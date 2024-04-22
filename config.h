@@ -33,11 +33,11 @@ static const char *const autostart[] = {
   "xset", "-dpms", NULL,
   "dbus-update-activation-environment", "--systemd", "--all", NULL,
   "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1", NULL,
-/*  "flameshot", NULL, */
   "dunst", NULL,
-  "picom", "--config /home/thanos/.config/picom.conf", NULL,
+  "picom", "--config", "/home/thanos/.config/picom.conf", NULL,
   "/home/thanos/github/dwm-thanos/scripts/status", NULL,
   "sh", "-c", "feh --bg-fill --randomize --recursive /home/thanos/Pictures/backgrounds/space-webb/*", NULL,
+/*  "flameshot", NULL, */
 /*  "synergy", NULL, */
   NULL /* terminate */
 };
