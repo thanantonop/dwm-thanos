@@ -28,17 +28,17 @@ static const char *colors[][3]           = {
 };
 
 static const char *const autostart[] = {
-  "xsetroot", "-cursor_name", "left_ptr", NULL,
   "xset", "s", "off", NULL,
   "xset", "s", "noblank", NULL,
-  "xset", "-dkms", NULL,
+  "xset", "-dpms", NULL,
   "dbus-update-activation-environment", "--systemd", "--all", NULL,
   "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1", NULL,
 /*  "flameshot", NULL, */
   "dunst", NULL,
-  "picom", NULL,
-  "sh", "-c", "$HOME/github/dwm-thanos/scripts/status", NULL,
-  "sh", "-c", "feh --randomize --bg-fill /home/thanos/Pictures/backgrounds/space-webb/*", NULL,
+  "picom", "--config /home/thanos/.config/picom.conf", NULL,
+  "/home/thanos/github/dwm-thanos/scripts/status", NULL,
+  "sh", "-c", "feh --bg-fill --randomize --recursive /home/thanos/Pictures/backgrounds/space-webb/*", NULL,
+/*  "synergy", NULL, */
   NULL /* terminate */
 };
 
