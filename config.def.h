@@ -105,7 +105,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_x,      spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = termcmd_kitty } },
-	{ MODKEY,                       XK_b,      spawn,          SHCMD ("brave-browser")},
+	{ MODKEY,                       XK_b,      spawn,          SHCMD ("firefox")},
 	{ MODKEY,                       XK_p,      spawn,          SHCMD ("flameshot full -p $HOME/Pictures/screenshots/")},
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD ("flameshot gui -p $HOME/Pictures/screenshots/")},
 	{ MODKEY|ControlMask,           XK_p,      spawn,          SHCMD ("flameshot gui --clipboard")},
