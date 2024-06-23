@@ -13,8 +13,8 @@ static const int showsystray             = 1;        /* 0 means no systray */
 static const int showbar                 = 1;        /* 0 means no bar */
 static const int topbar                  = 1;        /* 0 means bottom bar */
 static const Bool viewontag              = True;     /* Switch view on tag switch */
-static const char *fonts[]               = { "Carlito:size=12" };
-static const char dmenufont[]            = "Carlito:size=12";
+static const char *fonts[]               = { "Meslo LGS Nerd Font Mono:size=10" };
+static const char dmenufont[]            = "Meslo LGS Nerd Font Mono:size=10";
 static const char normbgcolor[]          = "#222222";
 static const char normbordercolor[]      = "#444444";
 static const char normfgcolor[]          = "#bbbbbb";
@@ -95,7 +95,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *roficmd[] = { "rofi", "-modi", "drun", "-show", "drun", "-font", "Carlito 12", NULL };
+static const char *roficmd[] = { "rofi", "-modi", "drun", "-show", "drun", "-font", "Meslo LGS Nerd Font Mono 10", NULL };
 static const char *termcmd[] = { "st", "-f", "MesloLGS Nerd Font Mono:size=10", NULL };
 static const char *termcmd_kitty[]  = { "kitty", NULL };
 
