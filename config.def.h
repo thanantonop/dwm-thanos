@@ -36,7 +36,7 @@ static const char *const autostart[] = {
   "dunst", NULL,
   "picom", "--config", "/home/thanos/.config/picom.conf", NULL,
   "/home/thanos/github/dwm-thanos/scripts/status", NULL,
-  "sh", "-c", "feh --bg-fill --randomize --recursive /home/thanos/Pictures/backgrounds/space-webb/*", NULL,
+  "sh", "-c", "feh --bg-fill --randomize --recursive /home/thanos/Pictures/backgrounds/*", NULL,
 /*  "flameshot", NULL, */
 /*  "synergy", NULL, */
   NULL /* terminate */
