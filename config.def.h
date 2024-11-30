@@ -15,11 +15,11 @@ static const int topbar                  = 1;        /* 0 means bottom bar */
 static const Bool viewontag              = True;     /* Switch view on tag switch */
 static const char *fonts[]               = { "Carlito:size=12" };
 static const char dmenufont[]            = "Carlito:size=12";
-static const char normbordercolor[]      = "#004275";
-static const char normbgcolor[]          = "#004275";
+static const char normbordercolor[]      = "#1D344F";
+static const char normbgcolor[]          = "#1D344F";
 static const char normfgcolor[]          = "#FFFFFF";
 static const char selbordercolor[]       = "#FF7200";
-static const char selbgcolor[]           = "#005A9E";
+static const char selbgcolor[]           = "#5294E2";
 static const char selfgcolor[]           = "#FFFFFF";
 
 static const char *colors[][3] = {
