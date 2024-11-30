@@ -37,8 +37,9 @@ static const char *const autostart[] = {
   "/usr/bin/lxpolkit", NULL,
   "dunst", NULL,
   "picom", "--config", "/home/thanos/.config/picom.conf", NULL,
-  "/home/thanos/github/dwm-thanos/scripts/status", NULL,
-  "sh", "-c", "feh --bg-fill --randomize --recursive /home/thanos/Pictures/backgrounds/*", NULL,
+  "sh", "-c", "feh --bg-fill --randomize /home/thanos/Pictures/backgrounds/*", NULL,
+  "slstatus", NULL,
+/*  "/home/thanos/github/dwm-thanos/scripts/status", NULL, */   
 /*  "flameshot", NULL, */
 /*  "synergy", NULL, */
   NULL /* terminate */
@@ -91,6 +92,7 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define STATUSBAR "dwmblocks"
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -107,11 +109,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_x,                      spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_x,                      spawn,          {.v = termcmd_kitty } },
     { MODKEY|ControlMask,           XK_x,                      spawn,          {.v = termcmd_alacritty } },	
-	{ MODKEY,                       XK_b,                      spawn,          SHCMD ("firefox")},
+    { MODKEY,                       XK_b,                      spawn,          SHCMD ("firefox")},
+    { MODKEY|ShiftMask,             XK_b,                      spawn,          SHCMD ("xdg-open https://")},
 	{ MODKEY,                       XK_p,                      spawn,          SHCMD ("flameshot full -p $HOME/Pictures/screenshots/")},
 	{ MODKEY|ShiftMask,             XK_p,                      spawn,          SHCMD ("flameshot gui -p $HOME/Pictures/screenshots/")},
 	{ MODKEY|ControlMask,           XK_p,                      spawn,          SHCMD ("flameshot gui --clipboard")},
-	{ MODKEY,                       XK_e,                      spawn,          SHCMD ("thunar")},
+    { MODKEY,                       XK_e,                      spawn,          SHCMD ("thunar")},
+    { MODKEY|ShiftMask,             XK_e,                      spawn,          SHCMD ("xdg-open .")},
     { MODKEY|ShiftMask,             XK_w,                      spawn,          SHCMD ("feh --randomize --bg-fill ~/Pictures/backgrounds/*")},
 	{ 0,                            0x1008ff02,                spawn,          SHCMD ("xbacklight -inc 10")},
 	{ 0,                            0x1008ff03,                spawn,          SHCMD ("xbacklight -dec 10")},

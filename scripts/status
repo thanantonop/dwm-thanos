@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Initialize
 printf "$$" > ~/.cache/pidofbar
@@ -48,10 +48,10 @@ update_backlight() {
 # Display function
 display() {
   status=""
-  [[ -n "$bat" ]] && status+=" $bat |"
-  [[ -n "$backlight" ]] && status+=" $backlight |"
-  [[ -n "$vol" ]] && status+=" $vol |"
-  [[ -n "$time" ]] && status+=" $time "
+  [[ -n "$bat" ]] && status+="$bat "
+  [[ -n "$backlight" ]] && status+="$backlight "
+  [[ -n "$vol" ]] && status+="$vol "
+  [[ -n "$time" ]] && status+="$time"
   xsetroot -name "$status"
 }
 
@@ -77,3 +77,4 @@ while true; do
       ;;
   esac
 done
+
