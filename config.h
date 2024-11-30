@@ -15,17 +15,19 @@ static const int topbar                  = 1;        /* 0 means bottom bar */
 static const Bool viewontag              = True;     /* Switch view on tag switch */
 static const char *fonts[]               = { "MesloLGS Nerd Font Mono:size=10" };
 static const char dmenufont[]            = "MesloLGS Nerd Font Mono:size=10";
-static const char normbgcolor[]          = "#222222";
-static const char normbordercolor[]      = "#444444";
-static const char normfgcolor[]          = "#bbbbbb";
-static const char selfgcolor[]           = "#eeeeee";
-static const char selbordercolor[]       = "#e345ff";
-static const char selbgcolor[]           = "#5aecf9";
-static const char *colors[][3]           = {
-       /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { normbgcolor, selbgcolor,  selbordercolor  },
+static const char normbordercolor[]      = "#3B4252";
+static const char normbgcolor[]          = "#2E3440";
+static const char normfgcolor[]          = "#D8DEE9";
+static const char selbordercolor[]       = "#EBCB8B";
+static const char selbgcolor[]           = "#8FBCBB";
+static const char selfgcolor[]           = "#2E3440";
+
+static const char *colors[][3] = {
+    /*               fg           bg           border   */
+    [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+    [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor },
 };
+
 
 static const char *const autostart[] = {
   "xset", "s", "off", NULL,
@@ -44,28 +46,26 @@ static const char *const autostart[] = {
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-/* static const char *tags[] = { "", "", "", "", "" }; */
+/* static const char *tags[] = { "", "", "󰊖", "", "" }; */
 
 static const char ptagf[] = "[%s %s]";	/* format of a tag label */
 static const char etagf[] = "[%s]";	/* format of an empty tag */
 static const int lcaselbl = 0;		/* 1 means make tag label lowercase */	
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ "kitty",   NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+    /* class                instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
+    { "St",                 NULL,     NULL,           0,         0,          1,          0,         0 },
+    { "kitty",              NULL,     NULL,           0,         0,          1,          0,         0 },
+    { "Alacritty",          NULL,     NULL,           0,         0,          1,          0,         0 },
+    { "thunar",             NULL,     NULL,           0,         1,          0,          0,         0 },
+    { NULL,                 NULL,     "Event Tester", 0,         0,          0,          1,        -1 }, /* xev */
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.6; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
-static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen window */
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -94,27 +94,30 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", normbgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *roficmd[] = { "rofi", "-modi", "drun", "-show", "drun", "-font", "MesloLGS Nerd Font Mono 10", NULL };
 static const char *termcmd[] = { "st", "-f", "MesloLGS Nerd Font Mono:size=10", NULL };
 static const char *termcmd_kitty[]  = { "kitty", NULL };
+static const char *termcmd_alacritty[]  = { "alacritty", NULL };
 
 static Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = roficmd } },
-	{ MODKEY,                       XK_x,      spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = termcmd_kitty } },
-	{ MODKEY,                       XK_b,      spawn,          SHCMD ("firefox")},
-	{ MODKEY,                       XK_p,      spawn,          SHCMD ("flameshot full -p $HOME/Pictures/screenshots/")},
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD ("flameshot gui -p $HOME/Pictures/screenshots/")},
-	{ MODKEY|ControlMask,           XK_p,      spawn,          SHCMD ("flameshot gui --clipboard")},
-	{ MODKEY,                       XK_e,      spawn,          SHCMD ("thunar")},
-	{ 0,                            0x1008ff02, spawn,         SHCMD ("xbacklight -inc 10")},
-	{ 0,                            0x1008ff03, spawn,         SHCMD ("xbacklight -dec 10")},
-	{ 0,                            0x1008ff11, spawn,         SHCMD ("amixer sset Master 5%- unmute")},
-	{ 0,                            0x1008ff12, spawn,         SHCMD ("amixer sset Master $(amixer get Master | grep -q '\\[on\\]' && echo 'mute' || echo 'unmute')")},
-	{ 0,                            0x1008ff13, spawn,         SHCMD ("amixer sset Master 5%+ unmute")},
+	/* modifier                     key                        function        argument */
+	{ MODKEY,                       XK_r,                      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_r,                      spawn,          {.v = roficmd } },
+	{ MODKEY,                       XK_x,                      spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_x,                      spawn,          {.v = termcmd_kitty } },
+    { MODKEY|ControlMask,           XK_x,                      spawn,          {.v = termcmd_alacritty } },	
+	{ MODKEY,                       XK_b,                      spawn,          SHCMD ("firefox")},
+	{ MODKEY,                       XK_p,                      spawn,          SHCMD ("flameshot full -p $HOME/Pictures/screenshots/")},
+	{ MODKEY|ShiftMask,             XK_p,                      spawn,          SHCMD ("flameshot gui -p $HOME/Pictures/screenshots/")},
+	{ MODKEY|ControlMask,           XK_p,                      spawn,          SHCMD ("flameshot gui --clipboard")},
+	{ MODKEY,                       XK_e,                      spawn,          SHCMD ("thunar")},
+    { MODKEY|ShiftMask,             XK_w,                      spawn,          SHCMD ("feh --randomize --bg-fill ~/Pictures/backgrounds/*")},
+	{ 0,                            0x1008ff02,                spawn,          SHCMD ("xbacklight -inc 10")},
+	{ 0,                            0x1008ff03,                spawn,          SHCMD ("xbacklight -dec 10")},
+	{ 0,                            0x1008ff11,                spawn,          SHCMD ("amixer sset Master 5%- unmute")},
+	{ 0,                            0x1008ff12,                spawn,          SHCMD ("amixer sset Master $(amixer get Master | grep -q '\\[on\\]' && echo 'mute' || echo 'unmute')")},
+	{ 0,                            0x1008ff13,                spawn,          SHCMD ("amixer sset Master 5%+ unmute")},
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -149,6 +152,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+    { MODKEY|ControlMask,           XK_q,      spawn,          SHCMD("$HOME/.config/rofi/powermenu.sh")},
 	{ MODKEY|ControlMask|ShiftMask, XK_r,      spawn,          SHCMD("systemctl reboot")},
 	{ MODKEY|ControlMask|ShiftMask, XK_s,      spawn,          SHCMD("systemctl suspend")},
 	{ MODKEY|ControlMask|ShiftMask, XK_p,      spawn,          SHCMD("systemctl poweroff")},
