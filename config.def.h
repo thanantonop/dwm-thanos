@@ -12,13 +12,15 @@ static const int systraypinningfailfirst = 1;        /* 1: if pinning fails, dis
 static const int showsystray             = 1;        /* 0 means no systray */
 static const int showbar                 = 1;        /* 0 means no bar */
 static const int topbar                  = 1;        /* 0 means bottom bar */
+#define ICONSIZE 16   								 /* icon size */
+#define ICONSPACING 5 								 /* space between icon and title */
 static const Bool viewontag              = True;     /* Switch view on tag switch */
 static const char *fonts[]               = { "MesloLGS Nerd Font Mono:size=10", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true" };
 static const char dmenufont[]            = "MesloLGS Nerd Font Mono:size=10";
 static const char normbordercolor[]      = "#003255";
 static const char normbgcolor[]          = "#003255";
 static const char normfgcolor[]          = "#FFFFFF";
-static const char selbordercolor[]       = "#FF7200";
+static const char selbordercolor[]       = "#E345FF";
 static const char selbgcolor[]           = "#2FCCD6";
 static const char selfgcolor[]           = "#003255";
 
@@ -36,9 +38,9 @@ static const char *const autostart[] = {
   "dbus-update-activation-environment", "--systemd", "--all", NULL,
   "/usr/bin/lxpolkit", NULL,
   "dunst", NULL,
-  "picom", "--config", "/home/thanos/.config/picom.conf", NULL,
   "sh", "-c", "feh --bg-fill --randomize /home/thanos/Pictures/backgrounds/*", NULL,
   "slstatus", NULL,
+/*  "picom", "--config", "/home/thanos/.config/picom.conf", NULL, */
 /*  "/home/thanos/github/dwm-thanos/scripts/status", NULL, */   
 /*  "flameshot", NULL, */
 /*  "synergy", NULL, */
@@ -107,8 +109,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_r,                      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_r,                      spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_x,                      spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_x,                      spawn,          {.v = termcmd_kitty } },
-    { MODKEY|ControlMask,           XK_x,                      spawn,          {.v = termcmd_alacritty } },	
+	{ MODKEY|ShiftMask,             XK_x,                      spawn,          {.v = termcmd_alacritty } },
+    { MODKEY|ControlMask,           XK_x,                      spawn,          {.v = termcmd_kitty } },	
     { MODKEY,                       XK_b,                      spawn,          SHCMD ("firefox")},
     { MODKEY|ShiftMask,             XK_b,                      spawn,          SHCMD ("xdg-open https://")},
 	{ MODKEY,                       XK_p,                      spawn,          SHCMD ("flameshot full -p $HOME/Pictures/screenshots/")},
