@@ -13,8 +13,8 @@ static const int showsystray             = 1;        /* 0 means no systray */
 static const int showbar                 = 1;        /* 0 means no bar */
 static const int topbar                  = 1;        /* 0 means bottom bar */
 static const Bool viewontag              = True;     /* Switch view on tag switch */
-static const char *fonts[]               = { "Carlito:size=12" };
-static const char dmenufont[]            = "Carlito:size=12";
+static const char *fonts[]               = { "MesloLGS Nerd Font Mono:size=10", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true" };
+static const char dmenufont[]            = "MesloLGS Nerd Font Mono:size=10";
 static const char normbordercolor[]      = "#003255";
 static const char normbgcolor[]          = "#003255";
 static const char normfgcolor[]          = "#FFFFFF";
@@ -97,7 +97,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *roficmd[] = { "rofi", "-modi", "drun", "-show", "drun", "-font", "Carlito 12", NULL };
+static const char *roficmd[] = { "rofi", "-modi", "drun", "-show", "drun", "-font", "MesloLGS Nerd Font Mono 10", "-config", "~/.config/rofi/rofidmenu.rasi", NULL };
 static const char *termcmd[] = { "st", "-f", "MesloLGS Nerd Font Mono:size=10", NULL };
 static const char *termcmd_kitty[]  = { "kitty", NULL };
 static const char *termcmd_alacritty[]  = { "alacritty", NULL };
@@ -116,6 +116,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_p,                      spawn,          SHCMD ("flameshot gui --clipboard")},
     { MODKEY,                       XK_e,                      spawn,          SHCMD ("thunar")},
     { MODKEY|ShiftMask,             XK_e,                      spawn,          SHCMD ("xdg-open .")},
+    { MODKEY|ControlMask,           XK_l,                      spawn,          SHCMD ("sh ~/.config/rofi/scripts/blur-lock")},
     { MODKEY|ShiftMask,             XK_w,                      spawn,          SHCMD ("feh --randomize --bg-fill ~/Pictures/backgrounds/*")},
 	{ 0,                            0x1008ff02,                spawn,          SHCMD ("xbacklight -inc 10")},
 	{ 0,                            0x1008ff03,                spawn,          SHCMD ("xbacklight -dec 10")},
@@ -156,9 +157,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-    { MODKEY|ControlMask,           XK_q,      spawn,          SHCMD("$HOME/.config/rofi/powermenu.sh")},
+    { MODKEY|ControlMask,           XK_q,      spawn,          SHCMD("$HOME/.config/rofi/scripts/powermenu.sh")},
+    { MODKEY|ControlMask|ShiftMask, XK_s,      spawn,          SHCMD("systemctl suspend")},
+    { MODKEY|ControlMask|ShiftMask, XK_h,      spawn,          SHCMD("systemctl hibernate")},    
 	{ MODKEY|ControlMask|ShiftMask, XK_r,      spawn,          SHCMD("systemctl reboot")},
-	{ MODKEY|ControlMask|ShiftMask, XK_s,      spawn,          SHCMD("systemctl suspend")},
 	{ MODKEY|ControlMask|ShiftMask, XK_p,      spawn,          SHCMD("systemctl poweroff")},
 };
 
