@@ -82,7 +82,7 @@ static const struct arg args[] = {
     { ram_used,             " %s",         NULL },
     { ram_total,            "/%s",          NULL },
     { ram_perc,             "(%s%%) ",      NULL },
-    { run_command,          " %s%% ",      "xbacklight -get" },
+/*    { run_command,          " %s%% ",      "xbacklight -get" }, */
     { battery_perc,         " %s%%",       "BAT0" },
     { battery_state,        "(%s) ",        "BAT0" },
     { run_command,          " %s ",        vol },
